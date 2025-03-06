@@ -58,7 +58,7 @@ int main(int argc, char *argv[], char *envp[])
 
     while (running)
     {
-        sleep(2); // Задержка для имитации работы
+        sleep(2); 
     }
     
     printf("Child %s_%s (PID %d) terminating\n", argv[0], argv[1], getpid());

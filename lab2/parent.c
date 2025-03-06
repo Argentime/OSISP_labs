@@ -9,7 +9,7 @@
 
 #define MAX_ENV 128
 #define MAX_LINE 256
-#define MAX_CHILDREN 100 // Максимальное количество дочерних процессов
+#define MAX_CHILDREN 100 
 
 int compare_env(const void *a, const void *b)
 {
@@ -47,6 +47,10 @@ char **create_child_env(const char *env_file, char **parent_env)
                 break;
             }
         }
+        if(strcmp(line, "LC_COLLATE")==0) {
+            child_env[i] = strdup("LC_COLLATE=C");
+            i++;
+        }
     }
     child_env[i] = NULL;
     fclose(fp);
@@ -76,6 +80,8 @@ int main(int argc, char *argv[], char *envp[])
         fprintf(stderr, "CHILD_PATH not set\n");
         return EXIT_FAILURE;
     }
+    
+    setenv("LC_COLLATE", "C", 1);
 
     int env_count = 0;
     while (envp[env_count])
@@ -83,7 +89,6 @@ int main(int argc, char *argv[], char *envp[])
     char **sorted_env = malloc(env_count * sizeof(char *));
     for (int i = 0; i < env_count; i++)
         sorted_env[i] = envp[i];
-    setenv("LC_COLLATE", "C", 1);
     qsort(sorted_env, env_count, sizeof(char *), compare_env);
     printf("Parent environment (sorted with LC_COLLATE=C):\n");
     for (int i = 0; i < env_count; i++)
