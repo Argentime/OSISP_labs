@@ -111,11 +111,10 @@ int main(int argc, char *argv[], char *envp[])
 
         if (input == 'q')
         {
-            // Завершаем все дочерние процессы
             for (int i = 0; i < child_num; i++)
             {
                 kill(children[i], SIGTERM);    // Отправляем SIGTERM
-                waitpid(children[i], NULL, 0); // Ждём завершения
+                waitpid(children[i], NULL, 0);
             }
             free_env(child_env);
             break;
