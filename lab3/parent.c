@@ -120,6 +120,6 @@ int main(int argc, char *argv[])
 
         printf("[Parent] PID: %d, Enter '+', '-', 'l', 'k', or 'q': ", getpid());
     }
-
+    
     return 0;
 }
