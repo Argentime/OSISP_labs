@@ -77,7 +77,6 @@ int main(int argc, char *argv[])
                     char num_str[4];
                     snprintf(num_str, sizeof(num_str), "%02d", child_num);
                     char *child_argv[3] = {"child", num_str, NULL};
-                    printf("[Child_%s] Attempting execve: %s\n", num_str, child_fullpath); // Отладка
                     if (execve(child_fullpath, child_argv, environ) == -1)
                     {
                         perror("[Child] execve failed");

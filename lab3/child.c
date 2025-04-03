@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
 
     snprintf(pid_str, sizeof(pid_str), "%s", argv[1]);
     printf("[Child_%s] Started, PID: %d, PPID: %d\n", pid_str, getpid(), getppid());
-    fflush(stdout);
 
     signal(SIGTERM, SIG_DFL);
 
